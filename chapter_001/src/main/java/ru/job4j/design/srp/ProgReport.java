@@ -26,10 +26,6 @@ public class ProgReport implements ReportGenerator {
 
     @Override
     public String generate(Predicate<Employer> filter) {
-        String original = generator.generate(filter);
-        StringBuilder sb = new StringBuilder();
-        sb.append("<!doctype html><html><head><title>report</title></head><body><h1>Отчёт по сотрудникам</h1><p>")
-                .append(System.lineSeparator()).append(original).append("</body></html>");
-        return sb.toString();
+        return new HTMLReport(generator).generate(filter);
     }
 }

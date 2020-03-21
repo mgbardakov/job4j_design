@@ -43,7 +43,7 @@ public class EcomomistReport implements ReportGenerator {
      * @return salary in string format
      */
      private static String transformSalary(double salary) {
-        String textSalary = String.valueOf(salary);
+        String textSalary = String.format("%.2f", salary);
         return String.format("%s р. %s коп.", textSalary.substring(0, textSalary.length() - 3),
                                               textSalary.substring(textSalary.length() - 2));
      }
