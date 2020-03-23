@@ -8,8 +8,8 @@ import java.util.Calendar;
 
 
 public class XMLReportTest {
-    @Test
-    public void whenGeneratedXMLForEconomists() {
+      @Test
+  public void whenGeneratedXMLForEconomists() {
         Store store = new Store();
         Calendar now = Calendar.getInstance();
         Employer worker = new Employer("Igor", now, now, 18400.23);

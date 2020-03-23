@@ -56,16 +56,17 @@ public class ReportEngine implements ReportGenerator {
      * @param report report string
      * @return list of columns
      */
-    public static List<Column> prepareReport(String report) {
+    public static List<List<String>> prepareReport(String report) {
         Pattern pat = Pattern.compile(";");
         var lines = report.lines().collect(Collectors.toList());
+        lines.set(0, lines.get(0).toLowerCase());
         var resultList = new ArrayList<List<String>>();
         for (String line : lines) {
             var newLine = pat.split(line);
             var element = Arrays.stream(newLine).map(String::trim).collect(Collectors.toList());
             resultList.add(element);
         }
-         List<Column> columns = new ArrayList<>();
+        /* List<Column> columns = new ArrayList<>();
          for (int i = 0; i < resultList.get(0).size(); i++) {
             var headLine = resultList.get(0).get(i).toLowerCase();
             var elements = new ArrayList<String>();
@@ -73,8 +74,8 @@ public class ReportEngine implements ReportGenerator {
                 elements.add(resultList.get(j).get(i));
             }
             columns.add(new Column(headLine, elements));
-         }
-         return columns;
+         }*/
+         return resultList;
 
     }
 

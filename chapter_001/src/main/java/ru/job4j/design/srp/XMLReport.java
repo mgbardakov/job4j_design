@@ -8,7 +8,8 @@ import java.util.function.Predicate;
  * @since 21.03.2020
  */
 public class XMLReport implements ReportGenerator {
-    private ReportGenerator generator;
+
+     private ReportGenerator generator;
 
     public XMLReport(ReportGenerator generator) {
         this.generator = generator;
@@ -26,11 +27,12 @@ public class XMLReport implements ReportGenerator {
                 .append("<report>").append(System.lineSeparator())
                 .append("<employees>").append(System.lineSeparator());
         var origin = generator.generate(filter);
-        var columns = ReportEngine.prepareReport(origin);
-        for (int i = 0; i < columns.get(0).getElements().size(); i++) {
+        var data = ReportEngine.prepareReport(origin);
+        for (int i = 1; i < data.size(); i++) {
             text.append("<employee>").append(System.lineSeparator());
-            for (Column c : columns) {
-                text.append(String.format("<%s>%s</%s>", c.getHeadLine(), c.getElements().get(i), c.getHeadLine()));
+            for (int j = 0; j < data.get(i).size(); j++) {
+                var c = data.get(i).get(j);
+                text.append(String.format("<%s>%s</%s>", data.get(0).get(j), c, data.get(0).get(j)));
                 text.append(System.lineSeparator());
             }
             text.append("</employee>").append(System.lineSeparator());
@@ -38,4 +40,5 @@ public class XMLReport implements ReportGenerator {
         text.append("</employees>").append(System.lineSeparator()).append("</report>");
         return text.toString();
     }
+
 }
