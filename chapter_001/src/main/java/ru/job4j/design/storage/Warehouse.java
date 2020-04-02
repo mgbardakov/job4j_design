@@ -1,9 +1,8 @@
 package ru.job4j.design.storage;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
 /**
  * realization of Storage for high  quality products
  * @author mbardakov
@@ -23,8 +22,8 @@ public class Warehouse implements Storage {
     }
 
     @Override
-    public void remove(Food food) {
-        foodList.remove(food);
+    public void resetStore() {
+        foodList = new ArrayList<>();
     }
 
     @Override
@@ -33,9 +32,14 @@ public class Warehouse implements Storage {
     }
 
     @Override
-    public boolean accept(Food food) {
-        var quality = ControllQuality.percentQuality(food);
+    public boolean accept(Food food, Calendar nowDate) {
+        var quality = ControllQuality.percentQuality(food, nowDate);
         return quality < 25.0;
+    }
+
+    @Override
+    public Iterator<Food> iterator() {
+        return foodList.iterator();
     }
 
     @Override
